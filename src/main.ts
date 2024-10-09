@@ -30,10 +30,12 @@ button1.addEventListener("click", () => {
 });
 
 // auto-clicker
+/**
 setInterval(() => {
     counter1++;
     counter1Div.textContent = `${counter1} pokes`;
 }, 1000);
+**/
 
 // variable for requestAnimationFrame
 let lastTime: number = 0;
