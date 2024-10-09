@@ -38,8 +38,8 @@ app.append(button1alt);
 
 // auto-clicker event: button turns on or off auto-clicker
 button1alt.addEventListener("click", () => {
-    if (button1alt.textContent === 'Auto-clicker off') {
-        button1alt.textContent = 'Auto-clicker on';
+    if (button1alt.textContent === 'Auto-Clicker off') {
+        button1alt.textContent = 'Auto-Clicker on';
         button1alt.style.color = 'green';
 
         // Starts interval for auto-clicker
@@ -48,7 +48,7 @@ button1alt.addEventListener("click", () => {
             counter1Div.textContent = `${counter1} pokes`;
         }, 1000);
     } else {
-        button1alt.textContent = 'Auto-clicker off';
+        button1alt.textContent = 'Auto-Clicker off';
         button1alt.style.color = 'red';
     }
 });
