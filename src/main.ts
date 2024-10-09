@@ -10,6 +10,6 @@ header.innerHTML = gameName;
 app.append(header);
 
 const button = document.createElement("button");
-button.textContent = "👉Click Me!👈";
+button.textContent = '👉Click Me!👈';
 
 app.append(button);
