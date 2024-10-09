@@ -18,7 +18,8 @@ counter1Div.textContent = `${counter1} pokes`;
 app.append(counter1Div);
 
 // clicker button
-const button1 = document.createElement("button1");
+const button1 = document.createElement("button");
+button1.id = "button1";
 button1.textContent = '👉Click Me!👈';
 app.append(button1);
 
@@ -29,7 +30,8 @@ button1.addEventListener("click", () => {
 });
 
 // auto-clicker button
-const button1alt = document.createElement("button1alt");
+const button1alt = document.createElement("button");
+button1alt.id = "button1alt";
 button1alt.textContent = 'Auto-Clicker Off';
 button1alt.style.color = 'red';
 app.append(button1alt);
@@ -43,7 +45,7 @@ button1alt.addEventListener("click", () => {
         // Starts interval for auto-clicker
         setInterval(() => {
             counter1++;
-            counter1Div.textContent = `${counter1} cookies`;
+            counter1Div.textContent = `${counter1} pokes`;
         }, 1000);
     } else {
         button1alt.textContent = 'Auto-clicker off';
