@@ -84,3 +84,8 @@ button:focus-visible {
   cursor: pointer;
   margin-top: 10px; /* Adds space between the button and other elements */
 }
+
+#app div {
+  font-size: 24px;
+  margin: 20px 0;
+}
