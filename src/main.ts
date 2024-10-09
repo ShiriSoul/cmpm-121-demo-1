@@ -9,7 +9,7 @@ const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
-const button = document.createElement("button");
-button.textContent = '👉Click Me!👈';
+const button1 = document.createElement("button1");
+button1.textContent = '👉Click Me!👈';
 
-app.append(button);
+app.append(button1);
