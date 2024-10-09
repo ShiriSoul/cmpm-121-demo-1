@@ -85,6 +85,10 @@ button:focus-visible {
   margin-top: 10px;
 }
 
+#app button {
+  margin-top: 10px;
+}
+
 #app button:nth-of-type(2) {
   background-color: #6d99d3;
   color: white;
