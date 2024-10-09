@@ -11,6 +11,7 @@ app.append(header);
 
 // init counter
 let counter1: number = 0;
+let growthRate: number = 0;
 
 // clicker counter display
 const counter1Div = document.createElement("div");
@@ -26,8 +27,30 @@ app.append(button1);
 // click event: button adds +1 to counter
 button1.addEventListener("click", () => {
     counter1++;
+    updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
 });
+
+// upgrade button
+const purchaseButton = document.createElement("button");
+purchaseButton.textContent = 'Upgrade (cost: 10 pokes)';
+purchaseButton.disabled = true; // Initially disabled
+app.append(purchaseButton);
+
+// purchase upgrade event: upgrades so 
+purchaseButton.addEventListener("click", () => {
+    if (counter1 >= 10) {
+        counter1 -= 10; // price for upgrade
+        growthRate += 1; // increments growth rate
+        counter1Div.textContent = `${counter1} pokes`;
+        updatePurchaseButtonState();
+    }
+});
+
+// updates whether purchase button's state is disable or enabled
+const updatePurchaseButtonState = () => {
+    purchaseButton.disabled = counter1 < 10; // disable if less than 10 pokes
+};
 
 // auto-clicker
 /**
@@ -47,7 +70,7 @@ const updateCounter = (timestamp: number) => {
         const elapsed = (timestamp - lastTime) / 1000;
         
         // increments counter by elapsed time to be 1 per second
-        counter1 += elapsed;
+        counter1 += elapsed * (1 + growthRate);
         
         // updates display
         counter1Div.textContent = `${Math.floor(counter1)} pokes`; // displays integers (whole nums)
