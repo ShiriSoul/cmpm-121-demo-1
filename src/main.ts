@@ -27,3 +27,26 @@ button1.addEventListener("click", () => {
     counter1++;
     counter1Div.textContent = `${counter1} pokes`;
 });
+
+// auto-clicker button
+const button1alt = document.createElement("button1alt");
+button1alt.textContent = 'Auto-Clicker Off';
+button1alt.style.color = 'red';
+app.append(button1alt);
+
+// auto-clicker event: button turns on or off auto-clicker
+button1alt.addEventListener("click", () => {
+    if (button1alt.textContent === 'Auto-clicker off') {
+        button1alt.textContent = 'Auto-clicker on';
+        button1alt.style.color = 'green';
+
+        // Starts interval for auto-clicker
+        setInterval(() => {
+            counter1++;
+            counter1Div.textContent = `${counter1} cookies`;
+        }, 1000);
+    } else {
+        button1alt.textContent = 'Auto-clicker off';
+        button1alt.style.color = 'red';
+    }
+});

@@ -76,13 +76,23 @@ button:focus-visible {
 }
 
 #app button1 {
-  background-color: #ff6347; /* Tomato background */
+  background-color: #ff6347;
   color: white;
   padding: 10px 20px;
   font-size: 16px;
   border: none;
   cursor: pointer;
-  margin-top: 10px; /* Adds space between the button and other elements */
+  margin-top: 10px;
+}
+
+#app button1alt {
+  background-color: #ff6347;
+  color: white;
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 #app div {
