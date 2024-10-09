@@ -28,3 +28,9 @@ button1.addEventListener("click", () => {
     counter1++;
     counter1Div.textContent = `${counter1} pokes`;
 });
+
+// auto-clicker
+setInterval(() => {
+    counter1++;
+    counter1Div.textContent = `${counter1} pokes`;
+}, 1000);
