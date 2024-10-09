@@ -85,16 +85,6 @@ button:focus-visible {
   margin-top: 10px;
 }
 
-#app button1alt {
-  background-color: #ff6347;
-  color: white;
-  padding: 6px 14px;
-  font-size: 12px;
-  border: none;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
 #app div {
   font-size: 24px;
   margin: 20px 0;
