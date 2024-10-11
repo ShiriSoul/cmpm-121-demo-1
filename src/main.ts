@@ -36,11 +36,11 @@ button1.addEventListener("click", () => {
     counter1Div.textContent = `${counter1} pokes`;
 });
 
-// Upgrade item data
+// upgrade item data
 const upgrades = [
-    { name: "Poke speed enchancing caffeine", cost: 10, rate: 0.1, count: 0, button: null as HTMLButtonElement | null },
-    { name: "advanced poking training", cost: 100, rate: 2.0, count: 0, button: null as HTMLButtonElement | null },
-    { name: "Cybernetic reaction enchancer", cost: 1000, rate: 50.0, count: 0, button: null as HTMLButtonElement | null }
+    { name: "Faster Clicking", cost: 10, rate: 0.1, count: 0, button: null as HTMLButtonElement | null },
+    { name: "Advanced Reflex Training", cost: 100, rate: 2.0, count: 0, button: null as HTMLButtonElement | null },
+    { name: "Cybernetic Enhancements", cost: 1000, rate: 50.0, count: 0, button: null as HTMLButtonElement | null }
 ];
 
 // create and display upgrade buttons
@@ -50,7 +50,6 @@ upgrades.forEach((upgrade) => {
     purchaseButton.disabled = true;
     app.append(purchaseButton);
 
-    // Save the reference of the button in the upgrade object
     upgrade.button = purchaseButton;
     
     // respective upgrade count display
@@ -75,21 +74,14 @@ upgrades.forEach((upgrade) => {
     });
 });
 
+// button state for upgrades to make sure you have enough 'pokes'
 const updatePurchaseButtonState = () => {
     upgrades.forEach((upgrade) => {
         if (upgrade.button) {
-            upgrade.button.disabled = counter1 < upgrade.cost; // Enable/disable based on available pokes
+            upgrade.button.disabled = counter1 < upgrade.cost;
         }
     });
 };
-
-// auto-clicker
-/**
-setInterval(() => {
-    counter1++;
-    counter1Div.textContent = `${counter1} pokes`;
-}, 1000);
-**/
 
 // variable for requestAnimationFrame
 let lastTime: number = 0;
@@ -98,12 +90,11 @@ let lastTime: number = 0;
 const updateCounter = (timestamp: number) => {
     if (lastTime) {
         const elapsed = (timestamp - lastTime) / 1000;
-        counter1 += elapsed * growthRate; // Increment counter based on growth rate
-        counter1Div.textContent = `${Math.floor(counter1)} pokes`; // Display as integer
+        counter1 += elapsed * growthRate; // increments counter based on growth rate
+        counter1Div.textContent = `${Math.floor(counter1)} pokes`; // display as integer
     }
     lastTime = timestamp;
 
-    // Continue the loop
     requestAnimationFrame(updateCounter);
 };
 
