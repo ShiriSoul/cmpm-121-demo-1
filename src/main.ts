@@ -171,6 +171,7 @@ upgrades.forEach((upgrade) => {
     const purchaseButton = document.createElement("button");
     purchaseButton.textContent = `Buy (cost: ${upgrade.cost} pokes)`;
     purchaseButton.disabled = true;
+    purchaseButton.classList.add('disabled');
 
     upgrade.button = purchaseButton;
 
@@ -199,7 +200,15 @@ upgrades.forEach((upgrade) => {
 const updatePurchaseButtonState = () => {
     upgrades.forEach((upgrade) => {
         if (upgrade.button) {
-            upgrade.button.disabled = counter1 < upgrade.cost;
+            if (counter1 >= upgrade.cost) {
+                upgrade.button.disabled = false;
+                upgrade.button.classList.remove('disabled');
+                upgrade.button.classList.add('enabled');
+            } else {
+                upgrade.button.disabled = true;
+                upgrade.button.classList.remove('enabled');
+                upgrade.button.classList.add('disabled');
+            }
         }
     });
 };
