@@ -148,36 +148,37 @@ const upgrades = [
     { name: "Cybernetic Enhancements", cost: 1000, rate: 50.0, count: 0, button: null as HTMLButtonElement | null }
 ];
 
-// create and display upgrade buttons in a row
+// create container for upgrades
 const upgradeContainer = document.createElement("div");
-upgradeContainer.classList.add("upgrade-container");
+upgradeContainer.className = "upgrade-container"; // class for flexbox
 app.append(upgradeContainer);
 
+// create and display upgrade buttons
 upgrades.forEach((upgrade) => {
     const upgradeBox = document.createElement("div");
-    upgradeBox.classList.add("upgrade-box");
+    upgradeBox.className = "upgrade-box"; // upgrade box
 
-    // upgrade name
+    // Upgrade name display
     const upgradeTitle = document.createElement("div");
-    upgradeTitle.classList.add("upgrade-title");
+    upgradeTitle.className = "upgrade-title"; // class for smaller title
     upgradeTitle.textContent = upgrade.name;
+    upgradeBox.appendChild(upgradeTitle);
 
-    // upgrade count display
+    // respective upgrade count display
     const upgradeCount = document.createElement("div");
-    upgradeCount.classList.add("upgrade-count");
-    upgradeCount.textContent = `(${upgrade.count})`;
+    upgradeCount.className = "upgrade-count"; // class for smaller count
+    upgradeCount.textContent = `(${upgrade.count})`; // updated format
+    upgradeBox.appendChild(upgradeCount);
 
-    // upgrade purchase button
+    // Buy button
     const purchaseButton = document.createElement("button");
     purchaseButton.textContent = `Buy (cost: ${upgrade.cost} pokes)`;
+    purchaseButton.className = "enabled"; // default class for button
     purchaseButton.disabled = true;
-    purchaseButton.classList.add('disabled');
+    upgradeBox.appendChild(purchaseButton);
 
-    upgrade.button = purchaseButton;
-
-    // Append elements in order
-    upgradeBox.append(upgradeTitle, upgradeCount, purchaseButton);
-    upgradeContainer.append(upgradeBox);
+    // Add upgrade box to the upgrade container
+    upgradeContainer.appendChild(upgradeBox);
 
     // buy event
     purchaseButton.addEventListener("click", () => {
@@ -188,27 +189,22 @@ upgrades.forEach((upgrade) => {
 
             // display update
             counter1Div.textContent = `${counter1} pokes`;
-            upgradeCount.textContent = `(${upgrade.count})`;
+            upgradeCount.textContent = `(${upgrade.count})`; // update the count display
             growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
 
             updatePurchaseButtonState();
         }
     });
+
+    upgrade.button = purchaseButton;
 });
 
 // button state for upgrades to make sure you have enough 'pokes'
 const updatePurchaseButtonState = () => {
     upgrades.forEach((upgrade) => {
         if (upgrade.button) {
-            if (counter1 >= upgrade.cost) {
-                upgrade.button.disabled = false;
-                upgrade.button.classList.remove('disabled');
-                upgrade.button.classList.add('enabled');
-            } else {
-                upgrade.button.disabled = true;
-                upgrade.button.classList.remove('enabled');
-                upgrade.button.classList.add('disabled');
-            }
+            upgrade.button.disabled = counter1 < upgrade.cost;
+            upgrade.button.className = upgrade.button.disabled ? "disabled" : "enabled"; // Update button class based on state
         }
     });
 };
