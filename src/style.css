@@ -137,7 +137,7 @@ button:focus-visible {
 }
 
 /* Style for the poke button */
-#app button {
+#button1 {
   background-color: #cc6653;
   color: white;
   padding: 10px 20px;
@@ -148,7 +148,7 @@ button:focus-visible {
   margin: 15px auto;
 }
 
-/* Container for the upgrades to allow horizontal scroll */
+/* Container for the upgrades */
 .upgrade-container {
   display: flex;
   flex-direction: row;
@@ -166,14 +166,14 @@ button:focus-visible {
 
 /* Style for upgrade titles */
 .upgrade-title {
-  font-size: 14px;
+  font-size: 12px;  /* Smaller font size */
   text-align: center;
   margin-bottom: 5px;
 }
 
 /* Style for upgrade count */
 .upgrade-count {
-  font-size: 12px;
+  font-size: 10px;  /* Smaller font size */
   margin-bottom: 10px;
 }
 
@@ -189,7 +189,13 @@ button:focus-visible {
   background-color: #70d36d;
   color: white;
   cursor: pointer;
-  width: auto;
+}
+
+/* General button styling */
+.upgrade-box button {
+  font-size: 10px;  /* Smaller font size for button text */
+  padding: 5px 10px;
+  width: 150px;
 }
 
 /* Style for the text display (counter, growth rate) */

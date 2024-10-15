@@ -228,5 +228,5 @@ const updateCounter = (timestamp: number) => {
     requestAnimationFrame(updateCounter);
 };
 
-// starts animationloop
+// starts animation loop
 requestAnimationFrame(updateCounter);
