@@ -166,14 +166,14 @@ button:focus-visible {
 
 /* Style for upgrade titles */
 .upgrade-title {
-  font-size: 12px;  /* Smaller font size */
+  font-size: 14px;  /* Smaller font size for upgrade name */
   text-align: center;
   margin-bottom: 5px;
 }
 
 /* Style for upgrade count */
 .upgrade-count {
-  font-size: 10px;  /* Smaller font size */
+  font-size: 12px;  /* Smaller font size for upgrade count */
   margin-bottom: 10px;
 }
 
@@ -193,7 +193,7 @@ button:focus-visible {
 
 /* General button styling */
 .upgrade-box button {
-  font-size: 10px;  /* Smaller font size for button text */
+  font-size: 14px;  /* Restoring button text size */
   padding: 5px 10px;
   width: 150px;
 }
