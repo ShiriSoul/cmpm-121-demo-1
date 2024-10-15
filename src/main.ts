@@ -143,42 +143,41 @@ button1.addEventListener("click", () => {
 
 // upgrade item data
 const upgrades = [
-    { name: "Faster Clicking", cost: 10, rate: 0.1, count: 0, button: null as HTMLButtonElement | null },
-    { name: "Advanced Reflex Training", cost: 100, rate: 2.0, count: 0, button: null as HTMLButtonElement | null },
-    { name: "Cybernetic Enhancements", cost: 1000, rate: 50.0, count: 0, button: null as HTMLButtonElement | null }
+    { name: "Faster Pokes", cost: 10, rate: 0.1, count: 0, button: null as HTMLButtonElement | null },
+    { name: "Strong Touch", cost: 100, rate: 2.0, count: 0, button: null as HTMLButtonElement | null },
+    { name: "Perfect Pokes", cost: 1000, rate: 50.0, count: 0, button: null as HTMLButtonElement | null }
 ];
 
-// create container for upgrades
+// create and display upgrade buttons in a row
 const upgradeContainer = document.createElement("div");
-upgradeContainer.className = "upgrade-container"; // class for flexbox
+upgradeContainer.classList.add("upgrade-container");
 app.append(upgradeContainer);
 
-// create and display upgrade buttons
 upgrades.forEach((upgrade) => {
     const upgradeBox = document.createElement("div");
-    upgradeBox.className = "upgrade-box"; // upgrade box
+    upgradeBox.classList.add("upgrade-box");
 
-    // Upgrade name display
+    // upgrade name
     const upgradeTitle = document.createElement("div");
-    upgradeTitle.className = "upgrade-title"; // class for smaller title
+    upgradeTitle.classList.add("upgrade-title");
     upgradeTitle.textContent = upgrade.name;
-    upgradeBox.appendChild(upgradeTitle);
 
-    // respective upgrade count display
+    // upgrade count display
     const upgradeCount = document.createElement("div");
-    upgradeCount.className = "upgrade-count"; // class for smaller count
-    upgradeCount.textContent = `(${upgrade.count})`; // updated format
-    upgradeBox.appendChild(upgradeCount);
+    upgradeCount.classList.add("upgrade-count");
+    upgradeCount.textContent = `(${upgrade.count})`;
 
-    // Buy button
+    // upgrade purchase button
     const purchaseButton = document.createElement("button");
     purchaseButton.textContent = `Buy (cost: ${upgrade.cost} pokes)`;
-    purchaseButton.className = "enabled"; // default class for button
     purchaseButton.disabled = true;
-    upgradeBox.appendChild(purchaseButton);
+    purchaseButton.classList.add('disabled');
 
-    // Add upgrade box to the upgrade container
-    upgradeContainer.appendChild(upgradeBox);
+    upgrade.button = purchaseButton;
+
+    // Append elements in order
+    upgradeBox.append(upgradeTitle, upgradeCount, purchaseButton);
+    upgradeContainer.append(upgradeBox);
 
     // buy event
     purchaseButton.addEventListener("click", () => {
@@ -189,22 +188,27 @@ upgrades.forEach((upgrade) => {
 
             // display update
             counter1Div.textContent = `${counter1} pokes`;
-            upgradeCount.textContent = `(${upgrade.count})`; // update the count display
+            upgradeCount.textContent = `(${upgrade.count})`;
             growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
 
             updatePurchaseButtonState();
         }
     });
-
-    upgrade.button = purchaseButton;
 });
 
 // button state for upgrades to make sure you have enough 'pokes'
 const updatePurchaseButtonState = () => {
     upgrades.forEach((upgrade) => {
         if (upgrade.button) {
-            upgrade.button.disabled = counter1 < upgrade.cost;
-            upgrade.button.className = upgrade.button.disabled ? "disabled" : "enabled"; // Update button class based on state
+            if (counter1 >= upgrade.cost) {
+                upgrade.button.disabled = false;
+                upgrade.button.classList.remove('disabled');
+                upgrade.button.classList.add('enabled');
+            } else {
+                upgrade.button.disabled = true;
+                upgrade.button.classList.remove('enabled');
+                upgrade.button.classList.add('disabled');
+            }
         }
     });
 };
