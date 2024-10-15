@@ -134,90 +134,62 @@ button:focus-visible {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
 }
 
-/* Main Clicker Button */
-.main-button {
+/* Style for the poke button */
+#app button {
   background-color: #cc6653;
   color: white;
   padding: 10px 20px;
-  font-size: 18px;
+  font-size: 16px;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  margin: 15px 0;
-  transition: background-color 0.3s;
+  display: block;
+  margin: 15px auto;
 }
 
-.main-button:hover {
-  background-color: #b3543e;
+/* Container for the upgrades to allow horizontal scroll */
+.upgrade-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  padding: 10px;
 }
 
-/* Upgrade Buttons */
-.upgrade-button {
+/* Each upgrade box */
+.upgrade-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+/* Style for upgrade titles */
+.upgrade-title {
+  font-size: 14px; /* Smaller font for upgrade name */
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+/* Style for upgrade count */
+.upgrade-count {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+/* Style for upgrade buttons */
+.upgrade-box button {
   background-color: #70d36d;
   color: white;
-  padding: 8px 16px;
+  padding: 5px 10px;
   font-size: 14px;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  width: auto;
 }
 
-.upgrade-button:hover:not(:disabled) {
-  background-color: #5bb75f;
-}
-
-.upgrade-button:disabled {
-  background-color: #a8a8a8;
-  cursor: not-allowed;
-}
-
-/* Counter and Growth Rate Displays */
+/* Style for the text display (counter, growth rate) */
 #app div {
   font-size: 24px;
-  margin: 10px 0;
-}
-
-/* Upgrades Container */
-#upgradesContainer {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 10px 0;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* Individual Upgrade Styling */
-.upgrade {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 20px;
-    min-width: 150px;
-}
-
-.upgrade div {
-    font-size: 16px;
-    margin-bottom: 8px;
-    text-align: center;
-    word-wrap: break-word;
-}
-
-/* Scrollbar Styling (Optional) */
-#upgradesContainer::-webkit-scrollbar {
-    height: 8px;
-}
-
-#upgradesContainer::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-}
-
-#upgradesContainer::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
+  margin: 20px 0;
 }

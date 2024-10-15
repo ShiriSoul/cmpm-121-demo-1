@@ -111,90 +111,91 @@ const gameName = "Poke Me";
 document.title = gameName;
 
 const header = document.createElement("h1");
-header.textContent = gameName;
+header.innerHTML = gameName;
 app.append(header);
 
-// Initialize counter and growth rate
+// init counter
 let counter1: number = 0;
 let growthRate: number = 0;
 
-// Clicker counter display
+// clicker counter display
 const counter1Div = document.createElement("div");
 counter1Div.textContent = `${counter1} pokes`;
 app.append(counter1Div);
 
-// Growth rate display
+// Create growth rate display (+++)
 const growthRateDiv = document.createElement("div");
 growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
 app.append(growthRateDiv);
 
-// Clicker button
+// clicker button
 const button1 = document.createElement("button");
 button1.id = "button1";
-button1.classList.add('main-button');
-button1.textContent = '👉 Poke Me! 👈';
+button1.textContent = '👉Poke Me!👈';
 app.append(button1);
 
-// Click event: button adds +1 to counter
+// click event: button adds +1 to counter
 button1.addEventListener("click", () => {
     counter1++;
     updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
 });
 
-// Upgrade item data
+// upgrade item data
 const upgrades = [
     { name: "Faster Clicking", cost: 10, rate: 0.1, count: 0, button: null as HTMLButtonElement | null },
     { name: "Advanced Reflex Training", cost: 100, rate: 2.0, count: 0, button: null as HTMLButtonElement | null },
     { name: "Cybernetic Enhancements", cost: 1000, rate: 50.0, count: 0, button: null as HTMLButtonElement | null }
 ];
 
-// Create upgrades container
-const upgradesContainer = document.createElement("div");
-upgradesContainer.id = "upgradesContainer";
-app.append(upgradesContainer);
+// create and display upgrade buttons in a row
+const upgradeContainer = document.createElement("div");
+upgradeContainer.classList.add("upgrade-container");
+app.append(upgradeContainer);
 
-// Create and display upgrade buttons
 upgrades.forEach((upgrade) => {
-    // Create a container for each upgrade
-    const upgradeDiv = document.createElement("div");
-    upgradeDiv.className = "upgrade";
+    const upgradeBox = document.createElement("div");
+    upgradeBox.classList.add("upgrade-box");
 
-    // Upgrade name and count
-    const upgradeStatusDiv = document.createElement("div");
-    upgradeStatusDiv.textContent = `${upgrade.name} (${upgrade.count})`;
-    upgradeDiv.append(upgradeStatusDiv);
+    // upgrade name
+    const upgradeTitle = document.createElement("div");
+    upgradeTitle.classList.add("upgrade-title");
+    upgradeTitle.textContent = upgrade.name;
 
-    // Purchase button
+    // upgrade count display
+    const upgradeCount = document.createElement("div");
+    upgradeCount.classList.add("upgrade-count");
+    upgradeCount.textContent = `(${upgrade.count})`;
+
+    // upgrade purchase button
     const purchaseButton = document.createElement("button");
-    purchaseButton.textContent = `Buy (${upgrade.cost} pokes)`;
+    purchaseButton.textContent = `Buy (cost: ${upgrade.cost} pokes)`;
     purchaseButton.disabled = true;
-    purchaseButton.classList.add('upgrade-button');
-    upgradeDiv.append(purchaseButton);
 
-    // Link the button to the upgrade data
     upgrade.button = purchaseButton;
 
-    // Buy event
+    // Append elements in order
+    upgradeBox.append(upgradeTitle, upgradeCount, purchaseButton);
+    upgradeContainer.append(upgradeBox);
+
+    // buy event
     purchaseButton.addEventListener("click", () => {
         if (counter1 >= upgrade.cost) {
-            counter1 -= upgrade.cost; // Deduct cost
-            growthRate += upgrade.rate; // Increase growth rate
-            upgrade.count++; // Increment upgrade count
+            counter1 -= upgrade.cost; // deduct cost
+            growthRate += upgrade.rate; // increase growth rate
+            upgrade.count++; // add to count for the respective upgrade
 
-            // Update displays
+            // display update
             counter1Div.textContent = `${counter1} pokes`;
-            upgradeStatusDiv.textContent = `${upgrade.name} (${upgrade.count})`;
+            upgradeCount.textContent = `(${upgrade.count})`;
             growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
 
             updatePurchaseButtonState();
         }
     });
-
-    upgradesContainer.append(upgradeDiv);
 });
 
-// Update the state of purchase buttons based on current pokes
+// button state for upgrades to make sure you have enough 'pokes'
 const updatePurchaseButtonState = () => {
     upgrades.forEach((upgrade) => {
         if (upgrade.button) {
@@ -203,19 +204,20 @@ const updatePurchaseButtonState = () => {
     });
 };
 
-// Animation loop using requestAnimationFrame
+// variable for requestAnimationFrame
 let lastTime: number = 0;
 
+// animation loop using requestAnimationFrame
 const updateCounter = (timestamp: number) => {
     if (lastTime) {
         const elapsed = (timestamp - lastTime) / 1000;
-        counter1 += elapsed * growthRate; // Increment counter based on growth rate
-        counter1Div.textContent = `${Math.floor(counter1)} pokes`; // Display as integer
+        counter1 += elapsed * growthRate; // increments counter based on growth rate
+        counter1Div.textContent = `${Math.floor(counter1)} pokes`; // display as integer
     }
     lastTime = timestamp;
 
     requestAnimationFrame(updateCounter);
 };
 
-// Start animation loop
+// starts animationloop
 requestAnimationFrame(updateCounter);
