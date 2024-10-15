@@ -1,3 +1,4 @@
+/**
 import "./style.css";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
@@ -99,4 +100,122 @@ const updateCounter = (timestamp: number) => {
 };
 
 // starts animationloop
+requestAnimationFrame(updateCounter);
+**/
+
+import "./style.css";
+
+const app: HTMLDivElement = document.querySelector("#app")!;
+
+const gameName = "Poke Me";
+document.title = gameName;
+
+const header = document.createElement("h1");
+header.textContent = gameName;
+app.append(header);
+
+// Initialize counter and growth rate
+let counter1: number = 0;
+let growthRate: number = 0;
+
+// Clicker counter display
+const counter1Div = document.createElement("div");
+counter1Div.textContent = `${counter1} pokes`;
+app.append(counter1Div);
+
+// Growth rate display
+const growthRateDiv = document.createElement("div");
+growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
+app.append(growthRateDiv);
+
+// Clicker button
+const button1 = document.createElement("button");
+button1.id = "button1";
+button1.classList.add('main-button');
+button1.textContent = '👉 Poke Me! 👈';
+app.append(button1);
+
+// Click event: button adds +1 to counter
+button1.addEventListener("click", () => {
+    counter1++;
+    updatePurchaseButtonState();
+    counter1Div.textContent = `${counter1} pokes`;
+});
+
+// Upgrade item data
+const upgrades = [
+    { name: "Faster Clicking", cost: 10, rate: 0.1, count: 0, button: null as HTMLButtonElement | null },
+    { name: "Advanced Reflex Training", cost: 100, rate: 2.0, count: 0, button: null as HTMLButtonElement | null },
+    { name: "Cybernetic Enhancements", cost: 1000, rate: 50.0, count: 0, button: null as HTMLButtonElement | null }
+];
+
+// Create upgrades container
+const upgradesContainer = document.createElement("div");
+upgradesContainer.id = "upgradesContainer";
+app.append(upgradesContainer);
+
+// Create and display upgrade buttons
+upgrades.forEach((upgrade) => {
+    // Create a container for each upgrade
+    const upgradeDiv = document.createElement("div");
+    upgradeDiv.className = "upgrade";
+
+    // Upgrade name and count
+    const upgradeStatusDiv = document.createElement("div");
+    upgradeStatusDiv.textContent = `${upgrade.name} (${upgrade.count})`;
+    upgradeDiv.append(upgradeStatusDiv);
+
+    // Purchase button
+    const purchaseButton = document.createElement("button");
+    purchaseButton.textContent = `Buy (${upgrade.cost} pokes)`;
+    purchaseButton.disabled = true;
+    purchaseButton.classList.add('upgrade-button');
+    upgradeDiv.append(purchaseButton);
+
+    // Link the button to the upgrade data
+    upgrade.button = purchaseButton;
+
+    // Buy event
+    purchaseButton.addEventListener("click", () => {
+        if (counter1 >= upgrade.cost) {
+            counter1 -= upgrade.cost; // Deduct cost
+            growthRate += upgrade.rate; // Increase growth rate
+            upgrade.count++; // Increment upgrade count
+
+            // Update displays
+            counter1Div.textContent = `${counter1} pokes`;
+            upgradeStatusDiv.textContent = `${upgrade.name} (${upgrade.count})`;
+            growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
+
+            updatePurchaseButtonState();
+        }
+    });
+
+    upgradesContainer.append(upgradeDiv);
+});
+
+// Update the state of purchase buttons based on current pokes
+const updatePurchaseButtonState = () => {
+    upgrades.forEach((upgrade) => {
+        if (upgrade.button) {
+            upgrade.button.disabled = counter1 < upgrade.cost;
+        }
+    });
+};
+
+// Animation loop using requestAnimationFrame
+let lastTime: number = 0;
+
+const updateCounter = (timestamp: number) => {
+    if (lastTime) {
+        const elapsed = (timestamp - lastTime) / 1000;
+        counter1 += elapsed * growthRate; // Increment counter based on growth rate
+        counter1Div.textContent = `${Math.floor(counter1)} pokes`; // Display as integer
+    }
+    lastTime = timestamp;
+
+    requestAnimationFrame(updateCounter);
+};
+
+// Start animation loop
 requestAnimationFrame(updateCounter);
