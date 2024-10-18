@@ -11,7 +11,9 @@ interface Item {
 const availableItems: Item[] = [
     { name: "Speedy Reflexes 👆", cost: 10, rate: 0.1 },
     { name: "Strong Muscles 💪", cost: 100, rate: 2 },
-    { name: "Goldly Pokes 🌟", cost: 1000, rate: 50 }
+    { name: "More Hands 🙎‍♂️", cost: 1000, rate: 50 },
+    { name: "Goldly Pokes 🌟", cost: 10000, rate: 100 },
+    { name: "Midas Touch ⚖️", cost: 500, rate: 0 }
 ];
 
 const app: HTMLDivElement = document.querySelector("#app")!;
@@ -26,6 +28,7 @@ app.append(header);
 // init counter
 let counter1: number = 0;
 let growthRate: number = 0;
+let clickValue: number = 1;
 
 // clicker counter display
 const counter1Div = document.createElement("div");
@@ -54,7 +57,7 @@ app.append(button1);
 
 // click event: button adds +1 to counter and change emojis
 button1.addEventListener("click", () => {
-    counter1++;
+    counter1 += clickValue; // use clickValue
     button1.textContent = "😫"; // change to second emoji
     updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
@@ -62,7 +65,7 @@ button1.addEventListener("click", () => {
     // revert emoji after 1 sec
     setTimeout(() => {
         button1.textContent = "😰";
-    }, 1000);
+    }, 500); // milliseconds (.5 secs)
 });
 
 // create and display upgrade buttons in a row
@@ -107,7 +110,12 @@ upgrades.forEach((upgrade) => {
     purchaseButton.addEventListener("click", () => {
         if (counter1 >= upgrade.cost) {
             counter1 -= upgrade.cost; // deduct cost
-            growthRate += upgrade.rate; // increase growth rate
+
+            if (upgrade.name === "Midas Touch") {
+                clickValue *= 2; // double the click value
+            } else {
+                growthRate += upgrade.rate; // increase growth rate for other upgrades
+            }
             upgrade.count++; // add to count for the respective upgrade
 
             // increase cost by factor of 1.15
