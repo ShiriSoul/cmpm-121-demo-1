@@ -5,15 +5,16 @@ interface Item {
     name: string;
     cost: number;
     rate: number;
+    description: string;
 }
 
 // Available items array
 const availableItems: Item[] = [
-    { name: "Speedy Reflexes 👆", cost: 10, rate: 0.1 },
-    { name: "Strong Muscles 💪", cost: 100, rate: 2 },
-    { name: "More Hands 🙎‍♂️", cost: 1000, rate: 50 },
-    { name: "Goldly Pokes 🌟", cost: 10000, rate: 100 },
-    { name: "Midas Touch ⚖️", cost: 10, rate: 0 }
+    { name: "Speedy Reflexes 👆", cost: 10, rate: 0.1, description: "Quicker Movement for faster clicks. +0.1" },
+    { name: "Strong Muscles 💪", cost: 100, rate: 2, description: "Powerful Pokes for efficient clicks. +2" },
+    { name: "More Hands 🙎‍♂️", cost: 1000, rate: 50, description: "Another friend here to help. +50" },
+    { name: "Goldly Pokes 🌟", cost: 10000, rate: 100, description: "Ascension in the art of poking. +100" },
+    { name: "Midas Touch ⚖️", cost: 10, rate: 0, description: "Money hands. x2 click worth" }
 ];
 
 const app: HTMLDivElement = document.querySelector("#app")!;
@@ -73,6 +74,17 @@ const upgradeContainer = document.createElement("div");
 upgradeContainer.classList.add("upgrade-container");
 app.append(upgradeContainer);
 
+// create descr element
+const descr = document.createElement("div");
+descr.className = "descr";
+descr.style.position = "absolute";
+descr.style.display = "none";
+descr.style.backgroundColor = "#333";
+descr.style.color = "#fff";
+descr.style.padding = "5px";
+descr.style.borderRadius = "5px";
+app.append(descr);
+
 // Use availableItems to create upgrades
 const upgrades = availableItems.map(item => ({
     ...item,
@@ -129,6 +141,21 @@ upgrades.forEach((upgrade) => {
 
             updatePurchaseButtonState();
         }
+    });
+
+    // show descr on hover
+    purchaseButton.addEventListener("mouseover", () => {
+        descr.textContent = upgrade.description; // set descr text
+        descr.style.display = "block"; // show descr
+    });
+
+    purchaseButton.addEventListener("mousemove", (e) => {
+        descr.style.left = `${e.pageX + 10}px`; // position descr near mouse
+        descr.style.top = `${e.pageY + 10}px`;
+    });
+
+    purchaseButton.addEventListener("mouseout", () => {
+        descr.style.display = "none"; // hide descr
     });
 });
 
