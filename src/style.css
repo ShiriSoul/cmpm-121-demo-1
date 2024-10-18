@@ -88,8 +88,8 @@ button:focus-visible {
 #button1 {
   background-size: cover;
   background-position: center;
-  width: 100px;
-  height: 100px;
+  width: 256px;
+  height: 256px;
   border: none;
   cursor: pointer;
 }
