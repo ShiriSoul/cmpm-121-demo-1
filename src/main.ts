@@ -28,7 +28,7 @@ const button1 = document.createElement("button");
 button1.id = "button1";
 
 const pokeImage = document.createElement("img");
-pokeImage.src = "./scr/pokeMe.png"; // Updated path to include /scr
+pokeImage.src = "./src/pokeMe.png"; // Adjusted path
 pokeImage.alt = "Poke Me!";
 button1.appendChild(pokeImage);
 app.append(button1);
@@ -36,13 +36,13 @@ app.append(button1);
 // Click event: button adds +1 to counter and change image
 button1.addEventListener("click", () => {
     counter1++;
-    pokeImage.src = "./scr/pokedMe.png"; // Updated path to include /scr
+    pokeImage.src = "./src/pokedMe.png"; // Adjusted path
     updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
 
     // Revert image after 1 sec
     setTimeout(() => {
-        pokeImage.src = "./scr/pokeMe.png"; // Updated path to include /scr
+        pokeImage.src = "./src/pokeMe.png"; // Adjusted path
     }, 1000);
 });
 
