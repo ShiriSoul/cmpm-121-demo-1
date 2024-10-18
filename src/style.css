@@ -84,22 +84,14 @@ button:focus-visible {
   justify-content: center;
 }
 
-/* Style for the poke button with background image */
+/* Style for the poke button */
 #button1 {
-  background-color: transparent;
-  background-image: url("../assets/pokeMe.png");
-  background-size: contain;
-  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100px;
+  height: 100px;
   border: none;
-  width: 128px;
-  height: 128px;
   cursor: pointer;
-  margin: 10px auto;
-}
-
-/* Style when button is clicked and changes to pokedMe */
-#button1:active {
-  background-image: url("../assets/pokedMe.png");
 }
 
 /* Container for the upgrades */
@@ -120,14 +112,14 @@ button:focus-visible {
 
 /* Style for upgrade titles */
 .upgrade-title {
-  font-size: 10px;
+  font-size: 10px;  /* Smaller font size for upgrade name */
   text-align: center;
   margin-bottom: 2px;
 }
 
 /* Style for upgrade count */
 .upgrade-count {
-  font-size: 10px;
+  font-size: 10px;  /* Smaller font size for upgrade count */
   margin-bottom: 10px;
 }
 
@@ -147,7 +139,7 @@ button:focus-visible {
 
 /* General button styling */
 .upgrade-box button {
-  font-size: 14px;
+  font-size: 14px;  /* Restoring button text size */
   padding: 5px 10px;
   width: 150px;
 }
