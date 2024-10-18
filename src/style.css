@@ -159,7 +159,7 @@ button:focus-visible {
 /* Each upgrade box */
 .upgrade-box {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   margin: 10px 30px;
 }
