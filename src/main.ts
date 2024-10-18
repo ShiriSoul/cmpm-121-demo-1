@@ -14,7 +14,7 @@ const availableItems: Item[] = [
     { name: "Strong Muscles 💪", cost: 100, rate: 2, description: "Powerful Pokes for efficient clicks. +2" },
     { name: "More Hands 🙎‍♂️", cost: 1000, rate: 50, description: "Another friend here to help. +50" },
     { name: "Goldly Pokes 🌟", cost: 10000, rate: 100, description: "Ascension in the art of poking. +100" },
-    { name: "Midas Touch ⚖️", cost: 10, rate: 0, description: "Money hands. x2 click worth" }
+    { name: "Midas Touch ⚖️", cost: 500, rate: 0, description: "Money hands. x2 click worth" }
 ];
 
 const app: HTMLDivElement = document.querySelector("#app")!;
