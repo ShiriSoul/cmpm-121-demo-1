@@ -9,56 +9,56 @@ const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
-// Init counter
+// init counter
 let counter1: number = 0;
 let growthRate: number = 0;
 
-// Clicker counter display
+// clicker counter display
 const counter1Div = document.createElement("div");
 counter1Div.textContent = `${counter1} pokes`;
 app.append(counter1Div);
 
-// Growth rate display creation
+// growth rate display creation
 const growthRateDiv = document.createElement("div");
-growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
+growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
 app.append(growthRateDiv);
 
-// Clicker button with emoji
+// clicker button with emoji
 const button1 = document.createElement("button");
 button1.id = "button1";
-button1.style.width = "256px";  // Set button width
-button1.style.height = "256px"; // Set button height
-button1.style.fontSize = "128px"; // Set font size for emoji
-button1.style.display = "flex"; // Center align content
-button1.style.alignItems = "center"; // Center emoji vertically
-button1.style.justifyContent = "center"; // Center emoji horizontally
-button1.style.border = "none"; // Remove default border
-button1.style.backgroundColor = "transparent"; // Make background transparent
-button1.style.cursor = "pointer"; // Change cursor to pointer
-button1.textContent = "😰"; // Starting emoji
+button1.style.width = "256px";
+button1.style.height = "256px";
+button1.style.fontSize = "256px";
+button1.style.display = "flex";
+button1.style.alignItems = "center";
+button1.style.justifyContent = "center";
+button1.style.border = "none";
+button1.style.backgroundColor = "transparent";
+button1.style.cursor = "pointer";
+button1.textContent = "😰";
 app.append(button1);
 
-// Click event: button adds +1 to counter and change emoji
+// click event: button adds +1 to counter and change emojis
 button1.addEventListener("click", () => {
     counter1++;
-    button1.textContent = "😫"; // Change to second emoji
+    button1.textContent = "😫"; // change to second emoji
     updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
 
-    // Revert emoji after 1 sec
+    // revert emoji after 1 sec
     setTimeout(() => {
-        button1.textContent = "😰"; // Revert back to the first emoji
+        button1.textContent = "😰";
     }, 1000);
 });
 
-// Upgrade item data
+// upgrade items
 const upgrades = [
     { name: "Faster Pokes", cost: 10, rate: 0.1, count: 0, button: null as HTMLButtonElement | null },
     { name: "Strong Touch", cost: 100, rate: 2.0, count: 0, button: null as HTMLButtonElement | null },
     { name: "Perfect Pokes", cost: 1000, rate: 50.0, count: 0, button: null as HTMLButtonElement | null }
 ];
 
-// Create and display upgrade buttons in a row
+// create and display upgrade buttons in a row
 const upgradeContainer = document.createElement("div");
 upgradeContainer.classList.add("upgrade-container");
 app.append(upgradeContainer);
@@ -67,50 +67,50 @@ upgrades.forEach((upgrade) => {
     const upgradeBox = document.createElement("div");
     upgradeBox.classList.add("upgrade-box");
 
-    // Upgrade name
+    // upgrade name
     const upgradeTitle = document.createElement("div");
     upgradeTitle.classList.add("upgrade-title");
     upgradeTitle.textContent = upgrade.name;
 
-    // Upgrade count display
+    // upgrade count display
     const upgradeCount = document.createElement("div");
     upgradeCount.classList.add("upgrade-count");
     upgradeCount.textContent = `(${upgrade.count})`;
 
-    // Upgrade purchase button
+    // upgrade purchase button
     const purchaseButton = document.createElement("button");
-    purchaseButton.textContent = `Buy (cost: ${upgrade.cost.toFixed(1)} pokes)`;
+    purchaseButton.textContent = `cost: ${upgrade.cost.toFixed(1)} pokes`;
     purchaseButton.disabled = true;
     purchaseButton.classList.add('disabled');
 
     upgrade.button = purchaseButton;
 
-    // Append elements in order
+    // append elements in order
     upgradeBox.append(upgradeTitle, upgradeCount, purchaseButton);
     upgradeContainer.append(upgradeBox);
 
-    // Buy event
+    // buy event
     purchaseButton.addEventListener("click", () => {
         if (counter1 >= upgrade.cost) {
-            counter1 -= upgrade.cost; // Deduct cost
-            growthRate += upgrade.rate; // Increase growth rate
-            upgrade.count++; // Add to count for the respective upgrade
+            counter1 -= upgrade.cost; // deduct cost
+            growthRate += upgrade.rate; // increase growth rate
+            upgrade.count++; // add to count for the respective upgrade
 
-            // Increase cost by factor of 1.15 after purchase
+            // increase cost by factor of 1.15
             upgrade.cost = upgrade.cost * 1.15;
 
-            // Display update
+            // display update
             counter1Div.textContent = `${counter1} pokes`;
             upgradeCount.textContent = `(${upgrade.count})`;
-            growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
-            purchaseButton.textContent = `Buy (cost: ${upgrade.cost.toFixed(1)} pokes)`; // Update cost display
+            growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
+            purchaseButton.textContent = `cost: ${upgrade.cost.toFixed(1)} pokes`; // update cost display
 
             updatePurchaseButtonState();
         }
     });
 });
 
-// Button state for upgrades to make sure you have enough 'pokes'
+// button state for upgrades to make sure you have enough pokes
 const updatePurchaseButtonState = () => {
     upgrades.forEach((upgrade) => {
         if (upgrade.button) {
@@ -127,20 +127,20 @@ const updatePurchaseButtonState = () => {
     });
 };
 
-// Variable for requestAnimationFrame
+// variable for requestAnimationFrame
 let lastTime: number = 0;
 
-// Animation loop using requestAnimationFrame
+// animation loop using requestAnimationFrame
 const updateCounter = (timestamp: number) => {
     if (lastTime) {
         const elapsed = (timestamp - lastTime) / 1000;
-        counter1 += elapsed * growthRate; // Increments counter based on growth rate
-        counter1Div.textContent = `${Math.floor(counter1)} pokes`; // Display as integer
+        counter1 += elapsed * growthRate; // increments counter based on growth rate
+        counter1Div.textContent = `${Math.floor(counter1)} pokes`; // displays as integer
     }
     lastTime = timestamp;
 
     requestAnimationFrame(updateCounter);
 };
 
-// Starts animation loop
+// starts animation loop
 requestAnimationFrame(updateCounter);

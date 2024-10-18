@@ -84,7 +84,7 @@ button:focus-visible {
   justify-content: center;
 }
 
-/* Style for the poke button */
+/* style for poke button */
 #button1 {
   background-size: cover;
   background-position: center;
@@ -94,7 +94,7 @@ button:focus-visible {
   cursor: pointer;
 }
 
-/* Container for the upgrades */
+/* container for upgrades */
 .upgrade-container {
   display: flex;
   flex-direction: column;
@@ -102,7 +102,7 @@ button:focus-visible {
   padding: 10px;
 }
 
-/* Each upgrade box */
+/* each upgrade box */
 .upgrade-box {
   display: flex;
   flex-direction: column;
@@ -110,41 +110,41 @@ button:focus-visible {
   margin: 10px 30px;
 }
 
-/* Style for upgrade titles */
+/* style for upgrade titles */
 .upgrade-title {
-  font-size: 10px;  /* Smaller font size for upgrade name */
+  font-size: 10px;  /* font size for upgrade name */
   text-align: center;
   margin-bottom: 2px;
 }
 
-/* Style for upgrade count */
+/* style for upgrade count */
 .upgrade-count {
-  font-size: 10px;  /* Smaller font size for upgrade count */
+  font-size: 10px;  /* font size for upgrade count */
   margin-bottom: 10px;
 }
 
-/* Style for upgrade buttons when disabled */
+/* style for upgrade buttons when disabled */
 .upgrade-box button.disabled {
   background-color: gray;
   color: #ccc;
   cursor: not-allowed;
 }
 
-/* Style for upgrade buttons when enabled */
+/* style for upgrade buttons when enabled */
 .upgrade-box button.enabled {
   background-color: #70d36d;
   color: white;
   cursor: pointer;
 }
 
-/* General button styling */
+/* general button style */
 .upgrade-box button {
-  font-size: 14px;  /* Restoring button text size */
+  font-size: 14px;  /* restore button text size */
   padding: 5px 10px;
   width: 150px;
 }
 
-/* Style for the text display (counter, growth rate) */
+/* style for the text display */
 #app div {
   font-size: 24px;
   margin: 20px 0;
