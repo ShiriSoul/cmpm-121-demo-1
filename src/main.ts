@@ -9,53 +9,51 @@ const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
-// init counter
+// Init counter
 let counter1: number = 0;
 let growthRate: number = 0;
 
-// clicker counter display
+// Clicker counter display
 const counter1Div = document.createElement("div");
 counter1Div.textContent = `${counter1} pokes`;
 app.append(counter1Div);
 
-// growth rate display creation
+// Growth rate display creation
 const growthRateDiv = document.createElement("div");
 growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
 app.append(growthRateDiv);
 
-// clicker button with image
+// Clicker button with image
 const button1 = document.createElement("button");
 button1.id = "button1";
 
 const pokeImage = document.createElement("img");
-pokeImage.src = "./pokeMe.png";
+pokeImage.src = "./scr/pokeMe.png"; // Updated path to include /scr
 pokeImage.alt = "Poke Me!";
-pokeImage.style.width = "256px";
-pokeImage.style.height = "256px";
 button1.appendChild(pokeImage);
 app.append(button1);
 
-// click event: button adds +1 to counter and change image
+// Click event: button adds +1 to counter and change image
 button1.addEventListener("click", () => {
     counter1++;
-    pokeImage.src = "./pokedMe.png";
+    pokeImage.src = "./scr/pokedMe.png"; // Updated path to include /scr
     updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
 
-    // revert image after 1 sec
+    // Revert image after 1 sec
     setTimeout(() => {
-        pokeImage.src = "./pokeMe.png";
+        pokeImage.src = "./scr/pokeMe.png"; // Updated path to include /scr
     }, 1000);
 });
 
-// upgrade item data
+// Upgrade item data
 const upgrades = [
     { name: "Faster Pokes", cost: 10, rate: 0.1, count: 0, button: null as HTMLButtonElement | null },
     { name: "Strong Touch", cost: 100, rate: 2.0, count: 0, button: null as HTMLButtonElement | null },
     { name: "Perfect Pokes", cost: 1000, rate: 50.0, count: 0, button: null as HTMLButtonElement | null }
 ];
 
-// create and display upgrade buttons in a row
+// Create and display upgrade buttons in a row
 const upgradeContainer = document.createElement("div");
 upgradeContainer.classList.add("upgrade-container");
 app.append(upgradeContainer);
@@ -64,17 +62,17 @@ upgrades.forEach((upgrade) => {
     const upgradeBox = document.createElement("div");
     upgradeBox.classList.add("upgrade-box");
 
-    // upgrade name
+    // Upgrade name
     const upgradeTitle = document.createElement("div");
     upgradeTitle.classList.add("upgrade-title");
     upgradeTitle.textContent = upgrade.name;
 
-    // upgrade count display
+    // Upgrade count display
     const upgradeCount = document.createElement("div");
     upgradeCount.classList.add("upgrade-count");
     upgradeCount.textContent = `(${upgrade.count})`;
 
-    // upgrade purchase button
+    // Upgrade purchase button
     const purchaseButton = document.createElement("button");
     purchaseButton.textContent = `Buy (cost: ${upgrade.cost.toFixed(1)} pokes)`;
     purchaseButton.disabled = true;
@@ -82,32 +80,32 @@ upgrades.forEach((upgrade) => {
 
     upgrade.button = purchaseButton;
 
-    // append elements in order
+    // Append elements in order
     upgradeBox.append(upgradeTitle, upgradeCount, purchaseButton);
     upgradeContainer.append(upgradeBox);
 
-    // buy event
+    // Buy event
     purchaseButton.addEventListener("click", () => {
         if (counter1 >= upgrade.cost) {
-            counter1 -= upgrade.cost; // deduct cost
-            growthRate += upgrade.rate; // increase growth rate
-            upgrade.count++; // add to count for the respective upgrade
+            counter1 -= upgrade.cost; // Deduct cost
+            growthRate += upgrade.rate; // Increase growth rate
+            upgrade.count++; // Add to count for the respective upgrade
 
-            // increase cost by factor of 1.15
+            // Increase cost by factor of 1.15 after purchase
             upgrade.cost = upgrade.cost * 1.15;
 
-            // display update
+            // Display update
             counter1Div.textContent = `${counter1} pokes`;
             upgradeCount.textContent = `(${upgrade.count})`;
             growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
-            purchaseButton.textContent = `Buy (cost: ${upgrade.cost.toFixed(1)} pokes)`;
+            purchaseButton.textContent = `Buy (cost: ${upgrade.cost.toFixed(1)} pokes)`; // Update cost display
 
             updatePurchaseButtonState();
         }
     });
 });
 
-// button state for upgrades to make sure you have enough 'pokes'
+// Button state for upgrades to make sure you have enough 'pokes'
 const updatePurchaseButtonState = () => {
     upgrades.forEach((upgrade) => {
         if (upgrade.button) {
@@ -124,20 +122,20 @@ const updatePurchaseButtonState = () => {
     });
 };
 
-// variable for requestAnimationFrame
+// Variable for requestAnimationFrame
 let lastTime: number = 0;
 
-// animation loop using requestAnimationFrame
+// Animation loop using requestAnimationFrame
 const updateCounter = (timestamp: number) => {
     if (lastTime) {
         const elapsed = (timestamp - lastTime) / 1000;
-        counter1 += elapsed * growthRate; // increments counter based on growth rate
-        counter1Div.textContent = `${Math.floor(counter1)} pokes`; // display as integer
+        counter1 += elapsed * growthRate; // Increments counter based on growth rate
+        counter1Div.textContent = `${Math.floor(counter1)} pokes`; // Display as integer
     }
     lastTime = timestamp;
 
     requestAnimationFrame(updateCounter);
 };
 
-// starts animation loop
+// Starts animation loop
 requestAnimationFrame(updateCounter);
