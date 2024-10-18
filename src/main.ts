@@ -20,20 +20,26 @@ app.append(counter1Div);
 
 // growth rate display creation
 const growthRateDiv = document.createElement("div");
-growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
+growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
 app.append(growthRateDiv);
 
 // clicker button
 const button1 = document.createElement("button");
 button1.id = "button1";
-button1.textContent = '👉Poke Me!👈';
+button1.classList.add("poke-button"); // Add a class for styling the background
 app.append(button1);
 
-// click event: button adds +1 to counter
+// click event: button adds +1 to counter and changes image for 1 second
 button1.addEventListener("click", () => {
     counter1++;
     updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
+
+    // Change the button image to "pokedMe.png" for 1 second
+    button1.style.backgroundImage = 'url(../assets/pokedMe.png)';
+    setTimeout(() => {
+        button1.style.backgroundImage = 'url(../assets/pokeMe.png)';
+    }, 1000); // Revert back after 1 second
 });
 
 // upgrade item data
