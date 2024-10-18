@@ -151,7 +151,7 @@ button:focus-visible {
 /* Container for the upgrades */
 .upgrade-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   overflow-x: auto;
   padding: 10px;
 }
@@ -159,7 +159,7 @@ button:focus-visible {
 /* Each upgrade box */
 .upgrade-box {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   margin: 10px 30px;
 }
