@@ -23,8 +23,8 @@ const growthRateDiv = document.createElement("div");
 growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
 app.append(growthRateDiv);
 
-const pokeMeImg = "/assets/pokeMe.png";
-const pokedMeImg = "/assets/pokedMe.png";
+const pokeMeImg = "./assets/pokeMe.png";
+const pokedMeImg = "./assets/pokedMe.png";
 
 // clicker button
 const button1 = document.createElement("button");
