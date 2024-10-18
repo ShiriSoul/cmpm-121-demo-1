@@ -23,25 +23,30 @@ const growthRateDiv = document.createElement("div");
 growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
 app.append(growthRateDiv);
 
-const pokeMeImg = "./assets/pokeMe.png";
-const pokedMeImg = "./assets/pokedMe.png";
+const pokeMeImg = "pokeMe.png";
+const pokedMeImg = "pokedMe.png";
 
-// clicker button
+// clicker button with image
 const button1 = document.createElement("button");
 button1.id = "button1";
-button1.style.backgroundImage = `url(${pokeMeImg})`;
+const pokeImage = document.createElement("img");
+pokeImage.src = pokeMeImg;
+pokeImage.alt = "Poke Me!";
+pokeImage.style.width = "100px";
+pokeImage.style.height = "100px";
+button1.appendChild(pokeImage);
 app.append(button1);
 
-// click event: button adds +1 to counter and changes image for 1 second
+// click event: button adds +1 to counter and change image
 button1.addEventListener("click", () => {
     counter1++;
+    pokeImage.src = pokedMeImg; // change image
     updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
 
-    // Change image to pokedMe.png for 1 second
-    button1.style.backgroundImage = `url(${pokedMeImg})`;
+    // revert image
     setTimeout(() => {
-        button1.style.backgroundImage = `url(${pokeMeImg})`;
+        pokeImage.src = pokeMeImg;
     }, 1000);
 });
 
@@ -79,7 +84,7 @@ upgrades.forEach((upgrade) => {
 
     upgrade.button = purchaseButton;
 
-    // Append elements in order
+    // append elements in order
     upgradeBox.append(upgradeTitle, upgradeCount, purchaseButton);
     upgradeContainer.append(upgradeBox);
 
@@ -90,14 +95,14 @@ upgrades.forEach((upgrade) => {
             growthRate += upgrade.rate; // increase growth rate
             upgrade.count++; // add to count for the respective upgrade
 
-            // increase cost by factor of 1.15 after purchase
+            // increase cost by factor of 1.15
             upgrade.cost = upgrade.cost * 1.15;
 
             // display update
             counter1Div.textContent = `${counter1} pokes`;
             upgradeCount.textContent = `(${upgrade.count})`;
             growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
-            purchaseButton.textContent = `Buy (cost: ${upgrade.cost.toFixed(1)} pokes)`; // update cost display
+            purchaseButton.textContent = `Buy (cost: ${upgrade.cost.toFixed(1)} pokes)`;
 
             updatePurchaseButtonState();
         }
