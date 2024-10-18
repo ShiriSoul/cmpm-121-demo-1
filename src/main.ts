@@ -23,14 +23,12 @@ const growthRateDiv = document.createElement("div");
 growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
 app.append(growthRateDiv);
 
-const pokeMeImg = "./pokeMe.png"
-const pokedMeImg = "./pokedMe.png"
-
 // clicker button with image
 const button1 = document.createElement("button");
 button1.id = "button1";
+
 const pokeImage = document.createElement("img");
-pokeImage.src = pokeMeImg;
+pokeImage.src = "./pokeMe.png";
 pokeImage.alt = "Poke Me!";
 pokeImage.style.width = "256px";
 pokeImage.style.height = "256px";
@@ -40,13 +38,13 @@ app.append(button1);
 // click event: button adds +1 to counter and change image
 button1.addEventListener("click", () => {
     counter1++;
-    pokeImage.src = pokedMeImg; // change image
+    pokeImage.src = "./pokedMe.png";
     updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
 
-    // revert image
+    // revert image after 1 sec
     setTimeout(() => {
-        pokeImage.src = pokeMeImg;
+        pokeImage.src = "./pokeMe.png";
     }, 1000);
 });
 
