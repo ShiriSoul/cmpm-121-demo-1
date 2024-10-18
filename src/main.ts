@@ -1,5 +1,19 @@
 import "./style.css";
 
+// Define the Item interface
+interface Item {
+    name: string;
+    cost: number;
+    rate: number;
+}
+
+// Available items array
+const availableItems: Item[] = [
+    { name: "Speedy Reflexes 👆", cost: 10, rate: 0.1 },
+    { name: "Strong Muscles 💪", cost: 100, rate: 2 },
+    { name: "Goldly Pokes 🌟", cost: 1000, rate: 50 }
+];
+
 const app: HTMLDivElement = document.querySelector("#app")!;
 
 const gameName = "Poke Me";
@@ -51,17 +65,17 @@ button1.addEventListener("click", () => {
     }, 1000);
 });
 
-// upgrade items
-const upgrades = [
-    { name: "Faster Pokes", cost: 10, rate: 0.1, count: 0, button: null as HTMLButtonElement | null },
-    { name: "Strong Touch", cost: 100, rate: 2.0, count: 0, button: null as HTMLButtonElement | null },
-    { name: "Perfect Pokes", cost: 1000, rate: 50.0, count: 0, button: null as HTMLButtonElement | null }
-];
-
 // create and display upgrade buttons in a row
 const upgradeContainer = document.createElement("div");
 upgradeContainer.classList.add("upgrade-container");
 app.append(upgradeContainer);
+
+// Use availableItems to create upgrades
+const upgrades = availableItems.map(item => ({
+    ...item,
+    count: 0,
+    button: null as HTMLButtonElement | null
+}));
 
 upgrades.forEach((upgrade) => {
     const upgradeBox = document.createElement("div");
