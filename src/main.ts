@@ -20,30 +20,34 @@ app.append(counter1Div);
 
 // Growth rate display creation
 const growthRateDiv = document.createElement("div");
-growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
+growthRateDiv.textContent = `Growth rate: ${growthRate.toFixed(1)} pokes/sec`;
 app.append(growthRateDiv);
 
 // Clicker button with emoji
 const button1 = document.createElement("button");
 button1.id = "button1";
-
-// Create a span for the emoji
-const emojiDisplay = document.createElement("span");
-emojiDisplay.textContent = "😰"; // Starting emoji
-emojiDisplay.style.fontSize = "500px"; // Set size to 500px
-button1.appendChild(emojiDisplay);
+button1.style.width = "256px";  // Set button width
+button1.style.height = "256px"; // Set button height
+button1.style.fontSize = "128px"; // Set font size for emoji
+button1.style.display = "flex"; // Center align content
+button1.style.alignItems = "center"; // Center emoji vertically
+button1.style.justifyContent = "center"; // Center emoji horizontally
+button1.style.border = "none"; // Remove default border
+button1.style.backgroundColor = "transparent"; // Make background transparent
+button1.style.cursor = "pointer"; // Change cursor to pointer
+button1.textContent = "😰"; // Starting emoji
 app.append(button1);
 
 // Click event: button adds +1 to counter and change emoji
 button1.addEventListener("click", () => {
     counter1++;
-    emojiDisplay.textContent = "😫"; // Change to second emoji
+    button1.textContent = "😫"; // Change to second emoji
     updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
 
     // Revert emoji after 1 sec
     setTimeout(() => {
-        emojiDisplay.textContent = "😰"; // Revert back to the first emoji
+        button1.textContent = "😰"; // Revert back to the first emoji
     }, 1000);
 });
 
