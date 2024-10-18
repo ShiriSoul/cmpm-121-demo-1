@@ -13,7 +13,7 @@ const availableItems: Item[] = [
     { name: "Strong Muscles 💪", cost: 100, rate: 2 },
     { name: "More Hands 🙎‍♂️", cost: 1000, rate: 50 },
     { name: "Goldly Pokes 🌟", cost: 10000, rate: 100 },
-    { name: "Midas Touch ⚖️", cost: 500, rate: 0 }
+    { name: "Midas Touch ⚖️", cost: 10, rate: 0 }
 ];
 
 const app: HTMLDivElement = document.querySelector("#app")!;
@@ -57,10 +57,11 @@ app.append(button1);
 
 // click event: button adds +1 to counter and change emojis
 button1.addEventListener("click", () => {
-    counter1 += clickValue; // use clickValue
+    counter1 += clickValue; // Use the clickValue
     button1.textContent = "😫"; // change to second emoji
     updatePurchaseButtonState();
-    counter1Div.textContent = `${counter1} pokes`;
+    counter1Div.textContent = `${Math.floor(counter1)} pokes`; // update display to show integer
+
 
     // revert emoji after 1 sec
     setTimeout(() => {
@@ -122,7 +123,7 @@ upgrades.forEach((upgrade) => {
             upgrade.cost = upgrade.cost * 1.15;
 
             // display update
-            counter1Div.textContent = `${counter1} pokes`;
+            counter1Div.textContent = `${Math.floor(counter1)} pokes`;
             upgradeCount.textContent = `(${upgrade.count})`;
             growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
             purchaseButton.textContent = `cost: ${upgrade.cost.toFixed(1)} pokes`; // update cost display
