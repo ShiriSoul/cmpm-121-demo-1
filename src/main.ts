@@ -23,26 +23,27 @@ const growthRateDiv = document.createElement("div");
 growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
 app.append(growthRateDiv);
 
-// Clicker button with image
+// Clicker button with emoji
 const button1 = document.createElement("button");
 button1.id = "button1";
 
-const pokeImage = document.createElement("img");
-pokeImage.src = "./src/pokeMe.png"; // Adjusted path
-pokeImage.alt = "Poke Me!";
-button1.appendChild(pokeImage);
+// Create a span for the emoji
+const emojiDisplay = document.createElement("span");
+emojiDisplay.textContent = "😰"; // Starting emoji
+emojiDisplay.style.fontSize = "500px"; // Set size to 500px
+button1.appendChild(emojiDisplay);
 app.append(button1);
 
-// Click event: button adds +1 to counter and change image
+// Click event: button adds +1 to counter and change emoji
 button1.addEventListener("click", () => {
     counter1++;
-    pokeImage.src = "./src/pokedMe.png"; // Adjusted path
+    emojiDisplay.textContent = "😫"; // Change to second emoji
     updatePurchaseButtonState();
     counter1Div.textContent = `${counter1} pokes`;
 
-    // Revert image after 1 sec
+    // Revert emoji after 1 sec
     setTimeout(() => {
-        pokeImage.src = "./src/pokeMe.png"; // Adjusted path
+        emojiDisplay.textContent = "😰"; // Revert back to the first emoji
     }, 1000);
 });
 
