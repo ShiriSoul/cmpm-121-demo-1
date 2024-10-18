@@ -62,7 +62,6 @@ button1.addEventListener("click", () => {
     updatePurchaseButtonState();
     counter1Div.textContent = `${Math.floor(counter1)} pokes`; // update display to show integer
 
-
     // revert emoji after 1 sec
     setTimeout(() => {
         button1.textContent = "😰";
@@ -112,7 +111,7 @@ upgrades.forEach((upgrade) => {
         if (counter1 >= upgrade.cost) {
             counter1 -= upgrade.cost; // deduct cost
 
-            if (upgrade.name === "Midas Touch") {
+            if (upgrade.name === "Midas Touch ⚖️") {
                 clickValue *= 2; // double the click value
             } else {
                 growthRate += upgrade.rate; // increase growth rate for other upgrades
