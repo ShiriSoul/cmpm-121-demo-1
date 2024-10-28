@@ -27,14 +27,14 @@ header.innerHTML = gameName;
 app.append(header);
 
 // init counter
-let counter1: number = 0;
+let pokesCounter: number = 0;
 let growthRate: number = 0;
 let clickValue: number = 1;
 
 // clicker counter display
-const counter1Div = document.createElement("div");
-counter1Div.textContent = `${counter1} pokes`;
-app.append(counter1Div);
+const pokesCounterDiv = document.createElement("div");
+pokesCounterDiv.textContent = `${pokesCounter} pokes`;
+app.append(pokesCounterDiv);
 
 // growth rate display creation
 const growthRateDiv = document.createElement("div");
@@ -42,30 +42,21 @@ growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
 app.append(growthRateDiv);
 
 // clicker button with emoji
-const button1 = document.createElement("button");
-button1.id = "button1";
-button1.style.width = "256px";
-button1.style.height = "256px";
-button1.style.fontSize = "256px";
-button1.style.display = "flex";
-button1.style.alignItems = "center";
-button1.style.justifyContent = "center";
-button1.style.border = "none";
-button1.style.backgroundColor = "transparent";
-button1.style.cursor = "pointer";
-button1.textContent = "😰";
-app.append(button1);
+const clickerButton = document.createElement("button");
+clickerButton.id = "clickerButton";
+clickerButton.textContent = "😰";
+app.append(clickerButton);
 
 // click event: button adds +1 to counter and change emojis
-button1.addEventListener("click", () => {
-    counter1 += clickValue; // Use the clickValue
-    button1.textContent = "😫"; // change to second emoji
+clickerButton.addEventListener("click", () => {
+    pokesCounter += clickValue; // Use the clickValue
+    clickerButton.textContent = "😫"; // change to second emoji
     updatePurchaseButtonState();
-    counter1Div.textContent = `${Math.floor(counter1)} pokes`; // update display to show integer
+    pokesCounterDiv.textContent = `${Math.floor(pokesCounter)} pokes`; // update display to show integer
 
     // revert emoji after 1 sec
     setTimeout(() => {
-        button1.textContent = "😰";
+        clickerButton.textContent = "😰";
     }, 500); // milliseconds (.5 secs)
 });
 
@@ -120,8 +111,8 @@ upgrades.forEach((upgrade) => {
 
     // buy event
     purchaseButton.addEventListener("click", () => {
-        if (counter1 >= upgrade.cost) {
-            counter1 -= upgrade.cost; // deduct cost
+        if (pokesCounter >= upgrade.cost) {
+            pokesCounter -= upgrade.cost; // deduct cost
 
             if (upgrade.name === "Midas Touch ⚖️") {
                 clickValue *= 2; // double the click value
@@ -134,7 +125,7 @@ upgrades.forEach((upgrade) => {
             upgrade.cost = upgrade.cost * 1.15;
 
             // display update
-            counter1Div.textContent = `${Math.floor(counter1)} pokes`;
+            pokesCounterDiv.textContent = `${Math.floor(pokesCounter)} pokes`;
             upgradeCount.textContent = `(${upgrade.count})`;
             growthRateDiv.textContent = `${growthRate.toFixed(1)} pokes/sec`;
             purchaseButton.textContent = `cost: ${upgrade.cost.toFixed(1)} pokes`; // update cost display
@@ -163,7 +154,7 @@ upgrades.forEach((upgrade) => {
 const updatePurchaseButtonState = () => {
     upgrades.forEach((upgrade) => {
         if (upgrade.button) {
-            if (counter1 >= upgrade.cost) {
+            if (pokesCounter >= upgrade.cost) {
                 upgrade.button.disabled = false;
                 upgrade.button.classList.remove('disabled');
                 upgrade.button.classList.add('enabled');
@@ -183,8 +174,8 @@ let lastTime: number = 0;
 const updateCounter = (timestamp: number) => {
     if (lastTime) {
         const elapsed = (timestamp - lastTime) / 1000;
-        counter1 += elapsed * growthRate; // increments counter based on growth rate
-        counter1Div.textContent = `${Math.floor(counter1)} pokes`; // displays as integer
+        pokesCounter += elapsed * growthRate; // increments counter based on growth rate
+        pokesCounterDiv.textContent = `${Math.floor(pokesCounter)} pokes`; // displays as integer
     }
     lastTime = timestamp;
 

@@ -85,12 +85,18 @@ button:focus-visible {
 }
 
 /* style for poke button */
-#button1 {
+#clickerButton {
   background-size: cover;
   background-position: center;
   width: 256px;
   height: 256px;
   border: none;
+  cursor: pointer;
+  font-size: 256px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
   cursor: pointer;
 }
 
