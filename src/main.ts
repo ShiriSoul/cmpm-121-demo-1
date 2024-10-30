@@ -24,6 +24,7 @@ document.title = gameName;
 
 const header = document.createElement("h1");
 header.innerHTML = gameName;
+header.classList.add("heartbeat");
 app.append(header);
 
 // init counter
@@ -74,6 +75,7 @@ descr.style.backgroundColor = "#333";
 descr.style.color = "#fff";
 descr.style.padding = "5px";
 descr.style.borderRadius = "5px";
+descr.style.zIndex = "1000";
 app.append(descr);
 
 // Use availableItems to create upgrades
@@ -108,7 +110,7 @@ upgrades.forEach((upgrade) => {
     // append elements in order
     upgradeBox.append(upgradeTitle, upgradeCount, purchaseButton);
     upgradeContainer.append(upgradeBox);
-
+    
     // buy event
     purchaseButton.addEventListener("click", () => {
         if (pokesCounter >= upgrade.cost) {
@@ -149,6 +151,17 @@ upgrades.forEach((upgrade) => {
         descr.style.display = "none"; // hide descr
     });
 });
+
+// Wrap the main content in a new div to position it separately from the sidebar
+const mainContent = document.createElement("div");
+mainContent.classList.add("main-content");
+app.append(mainContent);
+
+// Append header, counter, and clicker button to the main content div
+mainContent.append(header, pokesCounterDiv, growthRateDiv, clickerButton);
+
+// Append upgrade container directly to the app for fixed sidebar positioning
+app.append(upgradeContainer);
 
 // button state for upgrades to make sure you have enough pokes
 const updatePurchaseButtonState = () => {
