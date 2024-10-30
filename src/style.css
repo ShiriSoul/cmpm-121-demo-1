@@ -111,6 +111,7 @@ button:focus-visible {
 }
 
 /* style for sidebar containing upgrade buttons */
+/* original implementation but inspired by https://zaneshan.github.io/cmpm-121-demo-1/ */
 .upgrade-container {
   display: flex;
   flex-direction: column;
@@ -174,6 +175,9 @@ button:focus-visible {
   color: rgb(255, 255, 255);
 }
 
+/* inspired by https://scso-ucsc.github.io/Incremental-Game-Development/ */
+/* index.html they used @keyframes to create a floating title effect. */
+/* I am doing a heartbeat effect instead but also using @keyframes, but in style.css and not index.html */
 @keyframes heartbeat {
   0%, 100% {
     transform: scale(1);
